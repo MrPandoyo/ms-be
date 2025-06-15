@@ -26,7 +26,6 @@ public class MasterRole extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @OrderBy("")
     @JsonIgnore
     @JsonManagedReference
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
