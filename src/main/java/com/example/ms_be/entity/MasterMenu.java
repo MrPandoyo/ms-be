@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter @Setter
 @Entity
 @Table
@@ -60,6 +61,10 @@ public class MasterMenu extends BaseEntity {
     @JsonManagedReference
     @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RoleMenu> roleMenus;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<MasterMenu> subMenu;
 
     public MasterMenu() {
     }

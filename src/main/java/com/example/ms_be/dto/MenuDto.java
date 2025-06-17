@@ -1,5 +1,6 @@
 package com.example.ms_be.dto;
 
+import com.example.ms_be.constant.Status;
 import com.example.ms_be.entity.MasterMenu;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class MenuDto {
     private String menuIcon;
     private String menuUrl;
     private Long menuOrder;
+    private Status status;
 
     private List<MenuDto> subMenu;
 
@@ -30,6 +32,7 @@ public class MenuDto {
         this.menuIcon = masterMenu.getMenuIcon();
         this.menuUrl = masterMenu.getMenuUrl();
         this.menuOrder = masterMenu.getMenuOrder();
+        this.status = masterMenu.getStatus();
         this.subMenu = new ArrayList<>();
     }
 }

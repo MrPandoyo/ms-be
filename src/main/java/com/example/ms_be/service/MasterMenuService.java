@@ -4,25 +4,33 @@ import com.example.ms_be.dao.MasterMenuDao;
 import com.example.ms_be.dto.MenuDto;
 import com.example.ms_be.entity.MasterMenu;
 import io.github.perplexhub.rsql.RSQLJPASupport;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class MasterMenuService {
 
     @Autowired
     private MasterMenuDao masterMenuDao;
 
-    public Page<MasterMenu> getMasterMenus(String rsqlQuery,Pageable pageable) {
-        if (rsqlQuery == null || rsqlQuery.trim().isEmpty()) {
-            return masterMenuDao.findAll(pageable);
-        }
-        return masterMenuDao.findAll(RSQLJPASupport.toSpecification(rsqlQuery),pageable);
+    public List<MasterMenu> getMasterMenus(String search) {
+        String query = "parent=null=";
+        if(StringUtils.hasText(search)) query = query+";"+search;
+        return masterMenuDao.findAll(RSQLJPASupport.toSpecification(query));
+    }
+
+    public Page<MasterMenu> getMasterMenus(String search,Pageable pageable) {
+        String query = "parent!=null";
+        if(StringUtils.hasText(search)) query = ";"+search;
+        return masterMenuDao.findAll(RSQLJPASupport.toSpecification(query),pageable);
     }
 
     public void save(MenuDto menuDto) throws Exception {
@@ -38,6 +46,7 @@ public class MasterMenuService {
             optionalMasterMenu.get().setMenuIcon(menuDto.getMenuIcon());
             optionalMasterMenu.get().setMenuUrl(menuDto.getMenuUrl());
             optionalMasterMenu.get().setMenuOrder(menuDto.getMenuOrder());
+            optionalMasterMenu.get().setStatus(menuDto.getStatus());
             masterMenu = optionalMasterMenu.get();
         }
         masterMenu.setParent(parentMenu.orElse(masterMenu.getParent()));

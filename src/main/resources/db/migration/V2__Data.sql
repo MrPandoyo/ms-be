@@ -4,11 +4,11 @@ values (1, 'SUPERADMIN', 'Super Admin', 'Full Access', 'ACTIVE', '2025-06-13 00:
        (3, 'USER', 'User', 'Normal User Role', 'ACTIVE', '2025-06-13 00:00:00');
 
 insert into master_menu(menu_id, parent_id, menu_code, menu_name, menu_icon, menu_url, menu_order, status, created_at)
-values (1, null, 'DASHBOARD', 'Dashboard', 'dashboard', '/dashboard', 1, 'ACTIVE', '2025-06-13 00:00:00'),
-       (2, null, 'DATA_MASTER', 'Data Master', 'database', '/master', 2, 'ACTIVE', '2025-06-13 00:00:00'),
-       (3, 2, 'MASTER_UNIT', 'Master Unit', 'building', '/master/unit', 1, 'ACTIVE', '2025-06-13 00:00:00'),
-       (4, 2, 'MASTER_ROLE', 'Master Role', 'users', '/master/role', 2, 'ACTIVE', '2025-06-13 00:00:00'),
-       (5, null, 'SETUP_MARGIN', 'Setup Margin', 'settings', '/setup/margin', 3, 'ACTIVE', '2025-06-13 00:00:00');
+values (1, null, 'DASHBOARD', 'Dashboard', 'mdi-home', '/dashboard', 1, 'ACTIVE', '2025-06-13 00:00:00'),
+       (2, null, 'DATA_MASTER', 'Data Master', 'mdi-database', '/master', 2, 'ACTIVE', '2025-06-13 00:00:00'),
+       (3, 2, 'MASTER_UNIT', 'Master Menu', 'mdi-domain', '/master/menu', 1, 'ACTIVE', '2025-06-13 00:00:00'),
+       (4, 2, 'MASTER_ROLE', 'Master Role', 'mdi-account', '/master/role', 2, 'ACTIVE', '2025-06-13 00:00:00'),
+       (5, null, 'SETUP_MARGIN', 'Setup Margin', 'mdi-cog', '/setup/margin', 3, 'ACTIVE', '2025-06-13 00:00:00');
 
 insert into role_menu(role_menu_id, role_id, menu_id, status, created_at)
 values (1, 1, 1, 'ACTIVE', '2025-06-13 00:00:00'),

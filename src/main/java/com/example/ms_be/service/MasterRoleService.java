@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,11 +27,8 @@ public class MasterRoleService {
     @Autowired private MasterMenuDao masterMenuDao;
     @Autowired private RoleMenuDao roleMenuDao;
 
-    public Page<MasterRole> getMasterRoles(String rsqlQuery, Pageable pageable) {
-        if (rsqlQuery == null || rsqlQuery.trim().isEmpty()) {
-            return masterRoleDao.findAll(pageable);
-        }
-        return masterRoleDao.findAll(RSQLJPASupport.toSpecification(rsqlQuery),pageable);
+    public List<MasterRole> getRoles() {
+        return masterRoleDao.findAll();
     }
 
     @Transactional

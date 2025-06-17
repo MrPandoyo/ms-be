@@ -19,6 +19,20 @@ public class RoleController {
     @Autowired private MasterRoleDao masterRoleDao;
     @Autowired private MasterRoleService masterRoleService;
 
+    @GetMapping("/role")
+    public ResponseEntity<?> getMasterRole() {
+        BaseResponse baseResponse = new BaseResponse();
+        try {
+            baseResponse.setStatus("success");
+            baseResponse.setData(masterRoleService.getRoles());
+        }catch (Exception e){
+            log.error("<UNK>", e);
+            baseResponse.setStatus("01");
+            baseResponse.setMessage(e.getMessage());
+        }
+        return ResponseEntity.ok(baseResponse);
+    }
+    
     @GetMapping("/role/{roleId}/menu")
     public ResponseEntity<?> getRoleMenus(@PathVariable("roleId") Long roleId) {
         BaseResponse baseResponse = new BaseResponse();
@@ -37,7 +51,7 @@ public class RoleController {
             masterRoleService.save(roleMenuDto);
 
             baseResponse.setStatus("success");
-            baseResponse.setMessage("Menu created successfully");
+            baseResponse.setMessage("Menu saved successfully");
         }catch (Exception e){
             log.error("<UNK>", e);
             baseResponse.setStatus("01");
